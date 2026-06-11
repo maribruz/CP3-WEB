@@ -1,0 +1,662 @@
+/* ========================
+   CSS VARIABLES & RESET
+======================== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=YouTube+Sans:wght@400;700&display=swap');
+
+:root {
+  --red:        #FF0000;
+  --red-dark:   #CC0000;
+  --red-light:  #FF4444;
+  --black:      #0F0F0F;
+  --dark:       #212121;
+  --mid:        #3d3d3d;
+  --gray:       #717171;
+  --light-gray: #E5E5E5;
+  --bg:         #F9F9F9;
+  --white:      #FFFFFF;
+  --shadow:     0 2px 12px rgba(0,0,0,0.12);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,0.18);
+  --radius:     12px;
+  --radius-sm:  8px;
+  --transition: 0.2s ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ========================
+   SCREEN MANAGEMENT
+======================== */
+.screen {
+  display: none;
+  min-height: 100vh;
+}
+.screen.active {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================
+   LOGIN SCREEN
+======================== */
+#login-screen {
+  background: var(--black);
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background decorative shapes */
+.login-bg-shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.07;
+  background: var(--red);
+}
+.shape.s1 {
+  width: 500px; height: 500px;
+  top: -150px; left: -150px;
+}
+.shape.s2 {
+  width: 350px; height: 350px;
+  bottom: -100px; right: -80px;
+  opacity: 0.05;
+}
+.shape.s3 {
+  width: 200px; height: 200px;
+  top: 50%; right: 15%;
+  opacity: 0.04;
+}
+
+.login-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 48px 44px 40px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  z-index: 1;
+  animation: cardIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(40px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Login Logo */
+.login-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.play-icon {
+  width: 48px; height: 48px;
+  background: var(--red);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 18px;
+  padding-left: 3px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(255,0,0,0.35);
+}
+.play-icon.small {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  font-size: 13px;
+  padding-left: 2px;
+  box-shadow: 0 2px 8px rgba(255,0,0,0.35);
+}
+
+.logo-text {
+  font-size: 26px;
+  color: var(--dark);
+  letter-spacing: -0.5px;
+}
+.logo-text strong {
+  color: var(--red);
+  font-weight: 700;
+}
+
+.login-subtitle {
+  color: var(--gray);
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--mid);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group input {
+  padding: 12px 16px;
+  border: 2px solid var(--light-gray);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-family: 'Roboto', sans-serif;
+  color: var(--dark);
+  background: var(--white);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(255,0,0,0.1);
+}
+
+.form-group input.error {
+  border-color: var(--red-light);
+  background: #fff5f5;
+}
+
+.field-error {
+  font-size: 12px;
+  color: var(--red-light);
+  min-height: 16px;
+  display: block;
+  font-weight: 500;
+}
+
+.global-error {
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: 8px;
+  display: block;
+  min-height: 20px;
+}
+
+/* Login Button */
+.btn-login {
+  width: 100%;
+  padding: 14px;
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 14px rgba(255,0,0,0.3);
+}
+
+.btn-login:hover {
+  background: var(--red-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255,0,0,0.4);
+}
+.btn-login:active {
+  transform: translateY(0);
+}
+
+.btn-play {
+  font-size: 14px;
+}
+
+/* ========================
+   HEADER
+======================== */
+.yt-header {
+  background: var(--red);
+  padding: 0 24px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.header-left .logo-text {
+  color: var(--white);
+  font-size: 20px;
+}
+.header-left .logo-text strong {
+  color: var(--white);
+  opacity: 0.9;
+}
+
+.header-center {
+  flex: 1;
+  text-align: center;
+}
+
+.header-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.user-badge {
+  color: rgba(255,255,255,0.85);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.btn-logout {
+  padding: 7px 16px;
+  background: rgba(0,0,0,0.2);
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  transition: background var(--transition);
+}
+.btn-logout:hover {
+  background: rgba(0,0,0,0.35);
+}
+
+/* ========================
+   MAIN CONTENT
+======================== */
+.main-content {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+  width: 100%;
+}
+
+/* ========================
+   ADD PANEL
+======================== */
+.add-panel {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 28px;
+  overflow: hidden;
+  border-top: 4px solid var(--red);
+  animation: fadeUp 0.4s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.add-panel-inner {
+  padding: 20px 24px;
+}
+
+.add-input-group {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.input-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--light-gray);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.input-wrapper:focus-within {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(255,0,0,0.08);
+}
+
+.input-icon {
+  padding: 0 12px;
+  font-size: 18px;
+  color: var(--gray);
+  flex-shrink: 0;
+}
+
+.input-wrapper input {
+  flex: 1;
+  padding: 12px 12px 12px 0;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  font-family: 'Roboto', sans-serif;
+  color: var(--dark);
+  background: transparent;
+}
+
+.add-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-add {
+  padding: 12px 18px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.btn-add.start {
+  background: var(--dark);
+  color: var(--white);
+}
+.btn-add.start:hover {
+  background: var(--mid);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.btn-add.end {
+  background: var(--red);
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(255,0,0,0.25);
+}
+.btn-add.end:hover {
+  background: var(--red-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(255,0,0,0.35);
+}
+
+.add-arrow {
+  font-size: 16px;
+  line-height: 1;
+}
+
+#error-add {
+  margin-top: 8px;
+}
+
+/* ========================
+   LIST SECTION
+======================== */
+.list-section {
+  animation: fadeUp 0.4s 0.1s ease both;
+}
+
+.list-header {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding-left: 4px;
+}
+
+.list-count {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+}
+
+.list-label {
+  font-size: 14px;
+  color: var(--gray);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.youtuber-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ========================
+   YOUTUBER CARD
+======================== */
+.youtuber-item {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow: hidden;
+  transition: box-shadow var(--transition), transform var(--transition);
+  border-left: 4px solid transparent;
+  animation: itemIn 0.3s ease both;
+}
+
+@keyframes itemIn {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.youtuber-item:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.14);
+  transform: translateY(-2px);
+  border-left-color: var(--red);
+}
+
+/* Position badge */
+.item-index {
+  width: 44px;
+  min-width: 44px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gray);
+  padding: 0 8px;
+  flex-shrink: 0;
+}
+
+/* Avatar / thumb area */
+.item-thumb {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, var(--red) 0%, #ff6b35 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.item-thumb::after {
+  content: '▶';
+  position: absolute;
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  bottom: 4px;
+  right: 4px;
+}
+
+/* Name display */
+.item-name {
+  flex: 1;
+  padding: 16px 16px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Edit input */
+.item-edit-input {
+  flex: 1;
+  padding: 10px 12px;
+  margin: 8px 8px 8px 0;
+  border: 2px solid var(--red);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-family: 'Roboto', sans-serif;
+  color: var(--dark);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255,0,0,0.1);
+  display: none;
+}
+
+/* Action buttons */
+.item-actions {
+  display: flex;
+  gap: 6px;
+  padding: 0 14px;
+  flex-shrink: 0;
+}
+
+.btn-icon {
+  width: 34px; height: 34px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), transform var(--transition);
+  font-family: 'Roboto', sans-serif;
+}
+
+.btn-edit {
+  background: var(--light-gray);
+  color: var(--mid);
+}
+.btn-edit:hover {
+  background: #e0e0e0;
+  transform: scale(1.1);
+}
+
+.btn-save {
+  background: #e8f5e9;
+  color: #2e7d32;
+  display: none;
+}
+.btn-save:hover {
+  background: #c8e6c9;
+  transform: scale(1.1);
+}
+
+.btn-cancel {
+  background: #fff3e0;
+  color: #e65100;
+  display: none;
+}
+.btn-cancel:hover {
+  background: #ffe0b2;
+  transform: scale(1.1);
+}
+
+.btn-remove {
+  background: #ffebee;
+  color: var(--red);
+}
+.btn-remove:hover {
+  background: #ffcdd2;
+  transform: scale(1.1);
+}
+
+/* ========================
+   EMPTY STATE
+======================== */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--gray);
+}
+.empty-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  opacity: 0.4;
+}
+.empty-text {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* ========================
+   RESPONSIVE
+======================== */
+@media (max-width: 600px) {
+  .add-input-group {
+    flex-direction: column;
+  }
+  .add-actions {
+    justify-content: stretch;
+  }
+  .btn-add {
+    flex: 1;
+    justify-content: center;
+  }
+  .header-center {
+    display: none;
+  }
+  .user-badge {
+    display: none;
+  }
+  .item-index {
+    display: none;
+  }
+  .header-title {
+    font-size: 15px;
+  }
+}
