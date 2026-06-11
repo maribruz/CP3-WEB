@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTubers Favoritos</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== LOGIN SCREEN ===== -->
+  <div id="login-screen" class="screen active">
+    <div class="login-bg-shapes">
+      <span class="shape s1"></span>
+      <span class="shape s2"></span>
+      <span class="shape s3"></span>
+    </div>
+
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="play-icon">&#9654;</div>
+        <span class="logo-text">Tube<strong>List</strong></span>
+      </div>
+      <p class="login-subtitle">Gerencie seus YouTubers favoritos</p>
+
+      <div class="form-group">
+        <label for="username">Usuário</label>
+        <input type="text" id="username" placeholder="Digite seu usuário" autocomplete="off" />
+        <span class="field-error" id="error-username"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" id="password" placeholder="Digite sua senha" />
+        <span class="field-error" id="error-password"></span>
+      </div>
+
+      <span class="field-error global-error" id="error-global"></span>
+
+      <button class="btn-login" onclick="handleLogin()">
+        <span class="btn-play">&#9654;</span> Entrar
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== MAIN SCREEN ===== -->
+  <div id="main-screen" class="screen">
+
+    <!-- Header -->
+    <header class="yt-header">
+      <div class="header-left">
+        <div class="play-icon small">&#9654;</div>
+        <span class="logo-text">Tube<strong>List</strong></span>
+      </div>
+      <div class="header-center">
+        <h1 class="header-title">Meus YouTubers Favoritos</h1>
+      </div>
+      <div class="header-right">
+        <span class="user-badge">&#128100; aluno</span>
+        <button class="btn-logout" onclick="handleLogout()">Sair</button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+      <!-- Add Panel -->
+      <section class="add-panel">
+        <div class="add-panel-inner">
+          <div class="add-input-group">
+            <div class="input-wrapper">
+              <span class="input-icon">&#128250;</span>
+              <input type="text" id="new-name" placeholder="Nome do YouTuber..." maxlength="60" />
+            </div>
+            <div class="add-actions">
+              <button class="btn-add start" onclick="addToStart()" title="Adicionar no início">
+                <span class="add-arrow">&#8593;</span> Início
+              </button>
+              <button class="btn-add end" onclick="addToEnd()" title="Adicionar no final">
+                <span class="add-arrow">&#8595;</span> Final
+              </button>
+            </div>
+          </div>
+          <span class="field-error" id="error-add"></span>
+        </div>
+      </section>
+
+      <!-- List Section -->
+      <section class="list-section">
+        <div class="list-header">
+          <span class="list-count" id="list-count"></span>
+          <span class="list-label">inscrições</span>
+        </div>
+        <ul id="youtuber-list" class="youtuber-list"></ul>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
